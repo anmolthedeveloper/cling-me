@@ -1,23 +1,33 @@
 window.addEventListener('load', positionWindow, false);
 window.addEventListener('resize', positionWindow, false);
 function positionWindow(){
-    var c = document.getElementsByClassName('main')[0];
-    var wh = window.innerHeight;
-    var ch = c.offsetHeight;
-    var tp = wh * .5 - ch * .5;
-    c.setAttribute('style','top:'+tp+'px; opacity:1;');
+    var ct = 0;
+    var t = setInterval(function (){
+        if(ct == 3){
+            clearInterval(t);
+        }
+        else {
+            ct++;
+            var c = document.getElementsByClassName('main')[0];
+            var wh = window.innerHeight;
+            var ch = c.offsetHeight;
+            var tp = wh * .5 - ch * .5;
+            c.setAttribute('style','top:'+tp+'px; opacity:1;');
 
-    var mummy = document.getElementsByClassName('signupForm')[0];
-    var children = mummy.getElementsByClassName('formElement');
-    var wd = mummy.offsetWidth;
-    for(var a = 0; a < children.length; a++){
-        children[a].setAttribute('style','width:'+wd+'px;');
-    }
-    var mywidth = wd * children.length;
-    var mh = c.offsetHeight;
-    document.getElementsByClassName('formContainer')[0].setAttribute('style','width:'+mywidth+'px;');
-    document.getElementsByClassName('formContainer')[0].setAttribute('data-left',0);
-    //add addEventListeners to back/next buttons
+            var mummy = document.getElementsByClassName('signupForm')[0];
+            var children = mummy.getElementsByClassName('formElement');
+            var wd = mummy.offsetWidth;
+            for(var a = 0; a < children.length; a++){
+                children[a].setAttribute('style','width:'+wd+'px;');
+            }
+            var mywidth = wd * children.length;
+            var mh = c.offsetHeight;
+            document.getElementsByClassName('formContainer')[0].setAttribute('style','width:'+mywidth+'px;');
+            document.getElementsByClassName('formContainer')[0].setAttribute('data-left',0);
+            //add addEventListeners to back/next buttons
+        }
+
+    },700);
     adEventListeners();
 }
 function adEventListeners(){
