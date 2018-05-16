@@ -1,81 +1,54 @@
 *{
     margin:0px;
     font-family:sans-serif;
-    transition: 0.8s all;
-    outline: none;
+    transition:0.3s all;
 }
 body{
+    font-size: 11px;
     background: #fff;
-    font-size:12px;
-    color:#666;
 }
-.main{
-    overflow: hidden;
-    max-width:700px;
-    /* box-shadow: 0px 0px 3px #ccc; */
-    position: relative;
-    margin:0px auto;
-}
-.leftMenu{
-    float:left;
-    width:40%;
-    position: relative;
-    padding:10px 0px;
+.navigation{
+    padding-top:10px;
     text-align:center;
-    /* border:1px solid #ccc; */
 }
-.rightMenu{
-    float:left;
-    text-align:center;
-    width:60%;
-    position: relative;
-    padding:10px 0px;
-    overflow: hidden;
-    /* border:1px solid #ccc; */
-}
-.clear{
-    clear:both;
-    width:100%;
-    display:block;
-}
-.signupForm{
-    overflow: hidden;
-}
-.formElement{
-    float:left;
-    transition: 0s all;
-    text-align:left;
-    /* border: 1px solid #000; */
-}
-.formElement table{ min-width:280px; /*border:1px solid #ccc;*/ margin:0px auto; }
-.formElement input{
-    border: none;
-    background: #f7f7f7;
-    padding: 8px 20px;
-    border-radius: 55px;
-    font-size: 12px;
-    width:86%;
-}
-.formElement button, .leftMenu button{
-    background: #00a6c5;
-    color: #fff;
-    border: none;
-    padding: 5px 30px;
-    border-radius: 100px;
-    margin-top: 10px;
+.navigationButton{
+    display: inline-block;
+    text-align: center;
+    border-bottom: 3px solid #fff;
+    padding: 10px 30px;
+    margin: 0px 10px;
+    font-weight: bold;
     cursor: pointer;
+    position: relative;
 }
-.leftMenu button{
-    background: #00a6c5;
-    color:#fff;
-    margin-top: 30px;
+.navigationButton:hover{
+    border-bottom: 3px solid #000;
 }
-.uss{
-    border: 1px solid #777;
-    width: 100%;
-    padding: 5px 15px;
-    background: #eee;
-    border-radius: 25px;
-    color: #444;
-    font-size: 12px;
+.menuArrow{
+    position: absolute;
+    right: 5px;
+    bottom: 5px;
+    width: 20px;
+}
+.navigationOptions{
+    position: absolute;
+    top: 37px;
+    left: 0px;
+    background: #fff;
+    min-width: 160%;
+    box-shadow: 0px 2px 3px #ccc;
+}
+.extraNavigation{
+    text-align: left;
+    padding: 5px;
+    border-top: 1px solid #ccc;
+    padding: 10px;
+    transition: 0.5s all;
+}
+.extraNavigation:nth-child(1){
+    border:none;
+}
+.extraNavigation:hover{
+    background:#ccc;
+    transition:none;
 }
