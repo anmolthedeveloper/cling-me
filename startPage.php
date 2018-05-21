@@ -19,7 +19,7 @@
             </div>
             <div class="rightMenu">
                 <div style="margin:5px;">
-                    <div class="loginForm" style="display:none;">
+                    <div class="loginForm" style="display:block;">
                         <div style="margin:5px; max-width:280px; margin:0px auto;">
                             <div class="formElement">
                                 <p style="text-align:center; font-weight:bold; font-size:16px;">Login </p>
@@ -51,7 +51,7 @@
                             </div>
                         </div>
                     </div>
-                    <div class="signupForm" style="display:block;">
+                    <div class="signupForm" style="display:none;">
                         <p style="text-align:center; font-weight:bold; font-size:16px;">Create account </p>
                         <div class="formContainer" style="margin-left:0px;" data-left="0">
                             <div class="formElement">
