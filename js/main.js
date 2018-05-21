@@ -1,81 +1,92 @@
-window.addEventListener('load', positionWindow, false);
-window.addEventListener('resize', positionWindow, false);
-function positionWindow(){
-    var ct = 0;
-    var t = setInterval(function (){
-        if(ct == 3){
-            clearInterval(t);
-        }
-        else {
-            ct++;
-            var c = document.getElementsByClassName('main')[0];
-            var wh = window.innerHeight;
-            var ch = c.offsetHeight;
-            var tp = wh * .5 - ch * .5;
-            c.setAttribute('style','top:'+tp+'px; opacity:1;');
+window.addEventListener('load', handleEvents, false);
+function handleEvents(){
+    /*
+        overlay is the element at the bottom of our web page that will help us to hide any drop down menus.
+        This element is positioned fixed, left:0px; and top:0px.
+        If you want to see the use of this element, goto main.css, search for '.overlay' and change the background of this element to rgba(0,0,0,0.5)
+        You should see a transparent element which when clicked, the drop down menu hides
+    */
+    var overlay = document.getElementsByClassName('overlay')[0];
+    overlay.addEventListener('click', hideMenus, false);
+    var others = document.getElementsByClassName('navigationButton')[4];
+    others.addEventListener('click', showMenu, false);
 
-            var mummy = document.getElementsByClassName('signupForm')[0];
-            var children = mummy.getElementsByClassName('formElement');
-            var wd = mummy.offsetWidth;
-            for(var a = 0; a < children.length; a++){
-                children[a].setAttribute('style','width:'+wd+'px;');
-            }
-            var mywidth = wd * children.length;
-            var mh = c.offsetHeight;
-            document.getElementsByClassName('formContainer')[0].setAttribute('style','width:'+mywidth+'px;');
-            document.getElementsByClassName('formContainer')[0].setAttribute('data-left',0);
-            //add addEventListeners to back/next buttons
-        }
+    var a = document.getElementsByClassName('piUpd')[0];
+    a.addEventListener('change', loopImages, false);
 
-    },700);
-    adEventListeners();
-}
-function adEventListeners(){
-    var ps = document.getElementsByClassName('formElement');
-    for(var v = 0; v < ps.length; v++){
-        var backButton = ps[v].getElementsByTagName('button')[0];
-        var nextButton = ps[v].getElementsByTagName('button')[1];
-        backButton.addEventListener('click', fetchpreviousform, false);
-        nextButton.addEventListener('click', fetchnextform, false);
-    }
     //the signup button
-    var buttons = document.getElementsByClassName('signupForm')[0].getElementsByTagName('button');
-    var lb = buttons[buttons.length-1];
-    lb.removeEventListener('click', fetchnextform, false);
-    lb.addEventListener('click', signup, false);
+    var butt = document.getElementsByClassName('theSubmitButton')[0];
+    butt.addEventListener('click', newPost, false);
 }
-function fetchnextform(){
-    //show the next form
-    var mummy = document.getElementsByClassName('signupForm')[0];
-    var children = mummy.getElementsByClassName('formContainer');
-    var wd = mummy.offsetWidth;
-    var lf = parseInt(children[0].getAttribute('data-left'));
-    // alert(lf);
-    // var ar = lf.split(':')[1];
-    // var l  = parseInt(ar.split('p')[0]);
-    // alert(ar);
-    var sb = lf + wd;
-    var ow = document.getElementsByClassName('formElement').length * wd;
-    children[0].setAttribute('data-left',sb);
-    children[0].setAttribute('style',' width:'+ow+'px; margin-left:-'+sb+'px;');
-    // alert(wd);
+function showMenu(){
+    var overlay = document.getElementsByClassName('overlay')[0];
+    var ww  = window.innerWidth;
+    var wh = window.innerHeight;
+    overlay.setAttribute('style','width:'+ww+'px; height:'+wh+'px; display:block;');
+    var others = document.getElementsByClassName('navigationButton')[4].getElementsByClassName('navigationOptions')[0];
+    others.style.display = 'block';
 }
-function fetchpreviousform(){
-    //show the next form
-    var mummy = document.getElementsByClassName('signupForm')[0];
-    var children = mummy.getElementsByClassName('formContainer');
-    var wd = mummy.offsetWidth;
-    var lf = parseInt(children[0].getAttribute('data-left'));
-    // alert(lf);
-    // var ar = lf.split(':')[1];
-    // var l  = parseInt(ar.split('p')[0]);
-    // alert(ar);
-    var sb = lf - wd;
-    var ow = document.getElementsByClassName('formElement').length * wd;
-    children[0].setAttribute('data-left',sb);
-    children[0].setAttribute('style',' width:'+ow+'px; margin-left:-'+sb+'px;');
-    // alert(wd);
+function hideMenus(){
+    var overlay = document.getElementsByClassName('overlay')[0];
+    overlay.setAttribute('style','width:0px; height:0px; display:none;');
+    var others = document.getElementsByClassName('navigationButton')[4].getElementsByClassName('navigationOptions')[0];
+    others.style.display = 'none';
 }
-function signup(){
-    alert();
+function loopImages(){
+    var mummy = document.getElementsByClassName('updims')[0];
+    for(var i = 0; i < this.files.length; i++){
+        var firstBorn = mummy.firstChild;
+        var div = document.createElement('div');
+        var prg = document.createElement('div');
+        prg.className = 'uiprogress';
+        div.className = 'ip';
+        div.appendChild(prg);
+        mummy.insertBefore(div,firstBorn);
+        var n = new uploadPhoto(div,this.files[i]);
+    }
+}
+function uploadPhoto(element,file){
+    var bar = element.getElementsByClassName('uiprogress')[0];
+	var fd = new FormData();
+	fd.append("picture", file);
+	var au;
+	if(window.XMLHttpRequest) au = new XMLHttpRequest();
+	else if(window.ActiveXObject) au = new ActiveXObject("Microsoft.XMLHTTP");
+
+	au.open('POST', 'php/uploadPhoto.php', true);
+	au.upload.onprogress = function(e) {
+		if (e.lengthComputable) {
+			var percentComplete  = (e.loaded / e.total) * element.offsetWidth;
+            bar.setAttribute('style','width:'+percentComplete+'px;');
+		}
+	};
+	au.onreadystatechange = function(){
+		if(au.status == 200 && au.readyState == 4){
+            element.innerHTML = '';
+			var resp = au.response;
+            var img = document.createElement('img');
+            img.src = 'photos/mini-thumbs/'+resp;
+			element.appendChild(img);
+
+            var is = document.getElementById('images');
+            var vs = is.value + ',' + resp;
+
+            is.value = vs;
+		}
+	}
+	au.send(fd);
+}
+function newPost(){
+    var mummy = document.getElementsByClassName('pscn')[0];
+    var c1    = document.getElementsByClassName('mypost')[1];
+    var div = document.createElement('div');
+    div.className = 'mypost';
+
+    mummy.insertBefore(div,c1);
+
+    //Time for ajax
+    var txt = document.getElementsByClassName('mytextarea')[0];
+    var ims = document.getElementById('images');
+    var data = 'text='+txt.innerHTML+'&images='+ims.value;
+    async('php/createPost.php','mypost','class',data,true,1,'');
 }
