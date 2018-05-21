@@ -2,14 +2,55 @@
     margin:0px;
     font-family:sans-serif;
     transition:0.3s all;
+    outline: none;
 }
 body{
     font-size: 11px;
     background: #fff;
 }
+a{
+    text-decoration: none;
+    color:#00a6c5;
+}
+.main{
+    max-width:1000px;
+    margin:0px auto;
+}
+.body{
+    margin-top:20px;
+}
+.leftDesk{
+    float:left;
+    width:60%;
+}
+.myUpdates{
+    float:left;
+    width:40%;
+}
+.clear{
+    display: block;
+    clear: both;
+}
+.myribbon{
+    position: relative;
+}
+.logoDiv{
+    position: absolute;
+}
+.cyname{
+    font-weight: bold;
+    font-size: 13px;
+}
+.cas{
+    color:#777;
+    font-style:italic;
+
+}
 .navigation{
     padding-top:10px;
-    text-align:center;
+    text-align:right;
+    /* border:1px solid #000; */
+
 }
 .navigationButton{
     display: inline-block;
@@ -37,6 +78,7 @@ body{
     background: #fff;
     min-width: 160%;
     box-shadow: 0px 2px 3px #ccc;
+    z-index: 10;
 }
 .extraNavigation{
     text-align: left;
@@ -51,4 +93,142 @@ body{
 .extraNavigation:hover{
     background:#ccc;
     transition:none;
+}
+.overlay{
+    position: fixed;
+    background:rgba(0,0,0,0);
+    top:0px;
+    left:0px;
+    cursor:pointer;
+}
+.newPost{
+    margin: 5px 0px;
+    padding: 10px;
+    outline: none;
+    border: 1px solid #ccc;
+    background: #f8f8f8;
+}
+.mytextarea{
+    padding: 10px;
+    outline: none;
+    border: 1px solid #eee;
+    word-wrap: break-word;
+    min-height:100px;
+}
+.phh{
+    font-weight: bold;
+    font-size: 14px;
+    padding:10px 0px;
+}
+.uploader,.ip{
+    float: left;
+    margin: 2px;
+    width: 67px;
+    height: 67px;
+    overflow: hidden;
+    position: relative;
+    border: 1px solid #ccc;
+}
+.ip img{
+    max-width:120%;
+    min-width: 100%;
+    min-height:100%;
+    max-height:180%;
+}
+.camera_uploader{
+    left: 16px;
+    top: 16px;
+    position: absolute;
+    width: 37px;
+}
+.piUpd{
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    cursor: pointer;
+    top: 0px;
+    left: 0px;
+    opacity: 0;
+}
+.uiprogress{
+    position: absolute;
+    top:0px;
+    left:0px;
+    height:100%;
+    background: #f00;
+}
+.updims{
+    margin:5px 0px;
+}
+.theSubmitButton{
+    border: 1px solid #ccc;
+    background: #eaeaea;
+    padding: 7px 30px;
+    float: right;
+    text-shadow: 1px 1px 1px #fff;
+    font-weight: bold;
+    cursor: pointer;
+}
+.myloader{
+    animation-name: loader;
+    animation-timing-function: linear;
+    animation-duration: 1s;
+    animation-delay: 0s;
+    animation-iteration-count: infinite;
+    margin:30px 0px;
+	width:20px;
+}
+@keyframes loader{
+	0% {transform:rotateZ(0deg); }
+	100%{ transform:rotateZ(360deg); }
+}
+.mypost{
+    border:1px solid #ccc;
+    margin:5px 0px;
+}
+.pimage{
+    height: 300px;
+    position: relative;
+}
+.psim img{
+    max-width:110%;
+    min-width: 100%;
+    min-height:100%;
+}
+.psim{
+    position: absolute;
+    left:0px;
+    top:0px;
+    overflow: hidden;
+    height: 300px;
+    width:100%;
+}
+.overlay{
+    z-index: 100;
+}
+.mprf{
+    /* box-shadow: 0px 4px 3px #000; */
+    z-index: 10;
+    position: relative;
+}
+.ptxt{
+    font-size: 12px;
+    line-height: 1.8;
+    color: #444;
+    padding: 10px;
+    background: #f3f3f3;
+}
+.pio{
+    background: #ccc;
+    text-align: center;
+    vertical-align: middle;
+    height: 50px;
+    width: 50px;
+    border-radius: 100px;
+    margin:5px 0px;
+}
+.pio img{
+    min-width:100%;
+    min-height: 100%;
+    max-width: 110%;
 }
